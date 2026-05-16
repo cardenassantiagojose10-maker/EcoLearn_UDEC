@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\EvaluationController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\TaskViewController;
+use App\Http\Controllers\Web\ChatbotController;
 use App\Http\Controllers\Web\ProgressController;
 
 /*
@@ -164,6 +165,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         ->name('users.destroy');
 
 });
+
+/*
+|--------------------------------------------------------------------------
+| CHATBOT
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/chatbot/respond', [ChatbotController::class, 'respond'])
+    ->middleware('throttle:30,1')
+    ->name('chatbot.respond');
 
 /*
 |--------------------------------------------------------------------------
