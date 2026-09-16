@@ -14,9 +14,9 @@
   <div class="col-xl-8">
 
     {{-- INFO BÁSICA --}}
-    <div class="adm-stat-card card p-4 mb-3">
-      <h6 class="fw-bold mb-3" style="color:#1a2636;">
-        <i class="bi bi-info-circle me-2" style="color:#006837;"></i>Información del curso
+    <div class="adm-card adm-stat-card p-4 mb-3">
+      <h6 class="font-display fw-bold mb-3" style="color:var(--ink);">
+        <i class="bi bi-info-circle me-2" style="color:var(--verde-ink);"></i>Información del curso
       </h6>
 
       <div class="mb-3">
@@ -41,13 +41,13 @@
     </div>
 
     {{-- ══ MÓDULOS ══ --}}
-    <div class="adm-stat-card card p-4 mb-3">
+    <div class="adm-card adm-stat-card p-4 mb-3">
       <div class="d-flex align-items-center justify-content-between mb-3">
-        <h6 class="fw-bold mb-0" style="color:#1a2636;">
-          <i class="bi bi-grid-3x3-gap me-2" style="color:#006837;"></i>Módulos del curso
+        <h6 class="font-display fw-bold mb-0" style="color:var(--ink);">
+          <i class="bi bi-grid-3x3-gap me-2" style="color:var(--verde-ink);"></i>Módulos del curso
         </h6>
         <button type="button" class="btn btn-sm" id="add-module"
-                style="background:#e8f5ee;color:#006837;border-radius:8px;font-size:.82rem;">
+                style="background:var(--verde-pale);color:var(--verde-ink);border-radius:8px;font-size:.82rem;">
           <i class="bi bi-plus-circle me-1"></i> Agregar módulo
         </button>
       </div>
@@ -56,13 +56,13 @@
     </div>
 
     {{-- ══ EVALUACIÓN ══ --}}
-    <div class="adm-stat-card card p-4 mb-3">
+    <div class="adm-card adm-stat-card p-4 mb-3">
       <div class="d-flex align-items-center justify-content-between mb-3">
-        <h6 class="fw-bold mb-0" style="color:#1a2636;">
-          <i class="bi bi-clipboard2-check me-2" style="color:#006837;"></i>Evaluación
+        <h6 class="font-display fw-bold mb-0" style="color:var(--ink);">
+          <i class="bi bi-clipboard2-check me-2" style="color:var(--verde-ink);"></i>Evaluación
         </h6>
         <button type="button" class="btn btn-sm" id="add-question"
-                style="background:#e8f5ee;color:#006837;border-radius:8px;font-size:.82rem;">
+                style="background:var(--verde-pale);color:var(--verde-ink);border-radius:8px;font-size:.82rem;">
           <i class="bi bi-plus-circle me-1"></i> Agregar pregunta
         </button>
       </div>
@@ -87,31 +87,31 @@
 
   {{-- ══ COLUMNA LATERAL ══ --}}
   <div class="col-xl-4">
-    <div class="adm-stat-card card p-4 mb-3" style="position:sticky;top:80px;">
-      <h6 class="fw-bold mb-3" style="color:#1a2636;">
-        <i class="bi bi-send me-2" style="color:#006837;"></i>Publicar
+    <div class="adm-card adm-stat-card p-4 mb-3" style="position:sticky;top:80px;">
+      <h6 class="font-display fw-bold mb-3" style="color:var(--ink);">
+        <i class="bi bi-send me-2" style="color:var(--verde-ink);"></i>Publicar
       </h6>
-      <p class="text-muted mb-3" style="font-size:.83rem;">
+      <p class="mb-3" style="font-size:.83rem;color:var(--ink-soft);">
         El curso se publicará inmediatamente y estará disponible para todos los estudiantes.
       </p>
       <button type="submit" class="btn w-100 fw-semibold mb-2"
-              style="background:#006837;color:#fff;border-radius:8px;">
+              style="background:var(--verde-surface);color:#fff;border-radius:8px;">
         <i class="bi bi-cloud-upload-fill me-2"></i> Publicar curso
       </button>
       <a href="{{ route('admin.courses.index') }}"
-         class="btn btn-outline-secondary w-100" style="border-radius:8px;font-size:.88rem;">
+         class="btn w-100" style="background:var(--surface-2);color:var(--ink);border:1px solid var(--border);border-radius:8px;font-size:.88rem;">
         Cancelar
       </a>
 
-      <hr>
-      <div id="course-summary" style="font-size:.8rem;color:#6b7280;">
+      <hr style="border-color:var(--border);">
+      <div id="course-summary" style="font-size:.8rem;color:var(--ink-soft);">
         <div class="d-flex justify-content-between mb-1">
           <span>Módulos</span>
-          <span id="count-modules" class="fw-semibold">0</span>
+          <span id="count-modules" class="fw-semibold" style="color:var(--ink);">0</span>
         </div>
         <div class="d-flex justify-content-between">
           <span>Preguntas</span>
-          <span id="count-questions" class="fw-semibold">0</span>
+          <span id="count-questions" class="fw-semibold" style="color:var(--ink);">0</span>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@ function moduleHTML(i) {
     <button type="button" class="remove-btn" onclick="removeItem(this,'module-form-card')">
       <i class="bi bi-x"></i>
     </button>
-    <div class="fw-semibold mb-2" style="color:#006837;font-size:.82rem;">
+    <div class="fw-semibold mb-2" style="color:var(--verde-ink);font-size:.82rem;">
       <i class="bi bi-grid-3x3-gap-fill me-1"></i>Módulo ${i+1}
     </div>
     <div class="row g-2">
@@ -166,13 +166,13 @@ function moduleHTML(i) {
                   placeholder="Desarrollo del contenido educativo del módulo..." required></textarea>
       </div>
       <div class="col-12">
-        <label class="form-label">Puntos clave <small class="text-muted">(uno por línea, hasta 5)</small></label>
+        <label class="form-label">Puntos clave <small style="color:var(--ink-soft);">(uno por línea, hasta 5)</small></label>
         <div id="kp-${i}">
           <input type="text" name="modules[${i}][key_points][]" class="form-control mb-1"
                  placeholder="Punto clave 1">
         </div>
         <button type="button" class="btn btn-sm mt-1"
-                style="background:#f0f9f4;color:#006837;border-radius:6px;font-size:.78rem;"
+                style="background:var(--verde-pale);color:var(--verde-ink);border-radius:6px;font-size:.78rem;"
                 onclick="addKeyPoint(${i})">
           <i class="bi bi-plus me-1"></i>Punto clave
         </button>
@@ -198,7 +198,7 @@ function questionHTML(i) {
     <button type="button" class="remove-btn" onclick="removeItem(this,'question-form-card')">
       <i class="bi bi-x"></i>
     </button>
-    <div class="fw-semibold mb-2" style="color:#006837;font-size:.82rem;">
+    <div class="fw-semibold mb-2" style="color:var(--verde-ink);font-size:.82rem;">
       <i class="bi bi-patch-question me-1"></i>Pregunta ${i+1}
     </div>
     <div class="mb-2">
