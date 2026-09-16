@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EcoLearn UDEC — @yield('page-title', 'Plataforma')</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   {{-- Evita el parpadeo del tema oscuro --}}
   <script>

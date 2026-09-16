@@ -36,7 +36,7 @@
       <div style="position:absolute; right:-70px; top:-70px; width:240px; height:240px; border-radius:50%; background:rgba(159,211,86,.16);"></div>
       <div style="position:relative;">
         <div style="font-size:12.5px; letter-spacing:1.4px; text-transform:uppercase; opacity:.75;">EcoLearn UDEC · Educación ambiental</div>
-        <h1 class="font-display" style="font-weight:800; font-size:34px; line-height:1.08; letter-spacing:-1.1px; margin:12px 0 10px;">{{ $greeting }},<br>{{ $first }} 👋</h1>
+        <h1 class="font-display" style="font-weight:800; font-size:34px; line-height:1.08; letter-spacing:-1.1px; margin:12px 0 10px;">{{ $greeting }},<br>{{ $first }} <i class="bi bi-emoji-smile-fill" style="color:var(--brote); font-size:.8em;"></i></h1>
         <p style="margin:0; font-size:14.5px; line-height:1.5; max-width:44ch; color:#fff;">
           @if($stats['courses_total'] > 0)
             Tienes <strong style="color:var(--brote);">{{ $stats['courses_total'] }} módulos</strong> disponibles y <strong style="color:var(--brote);">{{ $stats['tasks_pending'] }} tareas</strong> por completar.
@@ -216,7 +216,7 @@
               @endif
             </a>
           @empty
-            <p style="font-size:.85rem; color:var(--ink-soft); margin:0;">No tienes tareas pendientes. 🎉</p>
+            <p style="font-size:.85rem; color:var(--ink-soft); margin:0;">No tienes tareas pendientes. <i class="bi bi-stars" style="color:var(--verde-ink);"></i></p>
           @endforelse
         </div>
       </div>

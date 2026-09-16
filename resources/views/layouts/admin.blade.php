@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin · EcoLearn UDEC — @yield('page-title','Panel')</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   {{-- Evita el parpadeo del tema oscuro --}}
   <script>
@@ -130,11 +131,21 @@
     }
     .adm-stat-card:hover { transform:translateY(-2px); box-shadow:0 14px 30px rgba(10,40,26,.10); }
 
-    .adm-table { color:var(--ink); }
+    .adm-table {
+      --bs-table-bg: transparent;
+      --bs-table-color: var(--ink);
+      --bs-table-border-color: var(--border);
+      --bs-table-striped-bg: var(--surface-2);
+      --bs-table-striped-color: var(--ink);
+      --bs-table-hover-bg: var(--surface-2);
+      --bs-table-hover-color: var(--ink);
+      background:transparent;
+      color:var(--ink);
+    }
     .adm-table thead { background:var(--surface-2); font-size:11.5px; letter-spacing:.4px; text-transform:uppercase; color:var(--ink-soft); }
     .adm-table tbody tr { font-size:13.5px; border-color:var(--border) !important; }
     .adm-table tbody tr:hover { background:var(--surface-2); }
-    .adm-table td, .adm-table th { border-color:var(--border) !important; }
+    .adm-table td, .adm-table th { border-color:var(--border) !important; background:transparent; }
 
     .form-label { font-size:13px; font-weight:700; color:var(--ink); }
     .form-control, .form-select {

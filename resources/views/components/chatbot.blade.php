@@ -9,9 +9,9 @@
     width: 58px;
     height: 58px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #006837, #00924e);
+    background: var(--verde-surface);
     border: none;
-    box-shadow: 0 4px 20px rgba(0,104,55,.45);
+    box-shadow: 0 4px 20px rgba(14,91,63,.35);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +21,7 @@
   }
   #ecobot-toggle:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 28px rgba(0,104,55,.55);
+    box-shadow: 0 6px 28px rgba(14,91,63,.45);
   }
   #ecobot-toggle i { color:#fff; font-size:1.5rem; transition: opacity .2s; }
   #ecobot-toggle .ico-open  { display:block; }
@@ -34,8 +34,8 @@
     position: absolute;
     top: 2px; right: 2px;
     width: 14px; height: 14px;
-    background: #f0a500;
-    border: 2px solid #fff;
+    background: var(--miel);
+    border: 2px solid var(--surface);
     border-radius: 50%;
     animation: pulse-dot 2s infinite;
   }
@@ -49,12 +49,13 @@
     position: fixed;
     bottom: 100px;
     right: 28px;
-    width: 360px;
+    width: 370px;
     max-width: calc(100vw - 40px);
-    height: 520px;
+    height: 560px;
     max-height: calc(100vh - 140px);
     border-radius: 20px;
-    box-shadow: 0 12px 48px rgba(0,0,0,.22);
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 48px rgba(10,40,26,.22);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -63,8 +64,8 @@
     opacity: 0;
     pointer-events: none;
     transform-origin: bottom right;
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s ease;
-    background: #fff;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s ease, background .35s ease;
+    background: var(--surface);
   }
   #ecobot-window.is-open {
     transform: scale(1) translateY(0);
@@ -74,7 +75,7 @@
 
   /* ── Header ── */
   #ecobot-header {
-    background: linear-gradient(135deg, #006837, #00924e);
+    background: var(--verde-surface);
     padding: .9rem 1rem;
     display: flex;
     align-items: center;
@@ -83,40 +84,77 @@
   }
   #ecobot-header .bot-avatar {
     width: 38px; height: 38px;
-    background: rgba(255,255,255,.2);
+    background: rgba(255,255,255,.18);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
   #ecobot-header .bot-avatar i { color:#fff; font-size:1.1rem; }
-  #ecobot-header .bot-info { flex:1; }
-  #ecobot-header .bot-name { color:#fff; font-weight:700; font-size:.95rem; margin:0; line-height:1.2; }
-  #ecobot-header .bot-status { color:rgba(255,255,255,.75); font-size:.72rem; }
+  #ecobot-header .bot-info { flex:1; min-width:0; }
+  #ecobot-header .bot-name { font-family:'Bricolage Grotesque',sans-serif; color:#fff; font-weight:700; font-size:.95rem; margin:0; line-height:1.2; }
+  #ecobot-header .bot-status { color:rgba(255,255,255,.75); font-size:.72rem; display:flex; align-items:center; gap:5px; }
+  #ecobot-header .bot-status .dot-live { width:6px; height:6px; border-radius:50%; background:var(--brote); flex-shrink:0; }
   #ecobot-lang-btn {
-    background: rgba(255,255,255,.18);
-    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.3);
     color: #fff;
     border-radius: 20px;
     padding: .18rem .65rem;
     font-size: .72rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: .4px;
     cursor: pointer;
     transition: background .2s;
+    flex-shrink: 0;
   }
-  #ecobot-lang-btn:hover { background: rgba(255,255,255,.3); }
+  #ecobot-lang-btn:hover { background: rgba(255,255,255,.28); }
+  #ecobot-reset-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,.7);
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    display: flex; align-items:center; justify-content:center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .2s, color .2s;
+  }
+  #ecobot-reset-btn:hover { background: rgba(255,255,255,.16); color:#fff; }
 
   /* ── Philosophy Banner ── */
   #ecobot-banner {
-    background: linear-gradient(90deg, #fff8e6, #fffdf5);
-    border-bottom: 1px solid #f0a500;
+    background: var(--verde-pale);
+    border-bottom: 1px solid var(--border);
     padding: .55rem .9rem;
     font-size: .7rem;
-    color: #7a5c00;
+    color: var(--verde-ink);
     font-style: italic;
     line-height: 1.4;
     flex-shrink: 0;
   }
+
+  /* ── Suggestion chips ── */
+  #ecobot-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 .9rem .7rem;
+    flex-shrink: 0;
+    background: var(--surface-2);
+  }
+  .ecobot-chip {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--verde-ink);
+    font-size: .72rem;
+    font-weight: 600;
+    padding: .3rem .65rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .18s ease, transform .15s ease;
+    white-space: nowrap;
+  }
+  .ecobot-chip:hover { background: var(--verde-pale); transform: translateY(-1px); }
 
   /* ── Messages ── */
   #ecobot-messages {
@@ -127,11 +165,11 @@
     flex-direction: column;
     gap: .65rem;
     scroll-behavior: smooth;
-    background: #f8faf9;
+    background: var(--surface-2);
   }
   #ecobot-messages::-webkit-scrollbar { width: 4px; }
   #ecobot-messages::-webkit-scrollbar-track { background: transparent; }
-  #ecobot-messages::-webkit-scrollbar-thumb { background: #c8e6d0; border-radius: 4px; }
+  #ecobot-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
   .ecobot-msg {
     display: flex;
@@ -149,12 +187,13 @@
 
   .ecobot-msg .avatar {
     width: 28px; height: 28px;
-    background: linear-gradient(135deg,#006837,#00924e);
+    background: var(--verde-surface);
     border-radius: 50%;
     display: flex; align-items:center; justify-content:center;
     flex-shrink: 0;
   }
   .ecobot-msg .avatar i { color:#fff; font-size:.75rem; }
+  .ecobot-msg.user .avatar { background: var(--ink-soft); }
 
   .ecobot-msg .bubble {
     max-width: 82%;
@@ -166,19 +205,19 @@
     word-break: break-word;
   }
   .ecobot-msg.bot  .bubble {
-    background: #fff;
-    border: 1px solid #e2ede7;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-bottom-left-radius: 4px;
-    color: #2d3748;
-    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    color: var(--ink);
+    box-shadow: 0 1px 4px rgba(10,40,26,.06);
   }
   .ecobot-msg.user .bubble {
-    background: linear-gradient(135deg,#006837,#00924e);
+    background: var(--verde-surface);
     color: #fff;
     border-bottom-right-radius: 4px;
   }
-  .ecobot-msg.bot  .bubble strong { color: #005a2e; }
-  .ecobot-msg.bot  .bubble em     { color: #4a6741; font-style:italic; }
+  .ecobot-msg.bot  .bubble strong { color: var(--verde-ink); }
+  .ecobot-msg.bot  .bubble em     { color: var(--ink-soft); font-style:italic; }
 
   /* ── Typing indicator ── */
   #ecobot-typing {
@@ -189,22 +228,22 @@
   }
   #ecobot-typing .avatar {
     width: 28px; height: 28px;
-    background: linear-gradient(135deg,#006837,#00924e);
+    background: var(--verde-surface);
     border-radius: 50%;
     display: flex; align-items:center; justify-content:center;
     flex-shrink: 0;
   }
   #ecobot-typing .avatar i { color:#fff; font-size:.75rem; }
   #ecobot-typing .dots {
-    background:#fff; border:1px solid #e2ede7;
+    background:var(--surface); border:1px solid var(--border);
     border-radius:16px; border-bottom-left-radius:4px;
     padding: .55rem .8rem;
     display:flex; gap:4px; align-items:center;
-    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    box-shadow: 0 1px 4px rgba(10,40,26,.06);
   }
   #ecobot-typing .dots span {
     width:7px; height:7px;
-    background:#00924e; border-radius:50%;
+    background:var(--verde); border-radius:50%;
     animation: bounce-dot .9s infinite;
   }
   #ecobot-typing .dots span:nth-child(2) { animation-delay:.15s; }
@@ -217,8 +256,8 @@
   /* ── Input area ── */
   #ecobot-form {
     padding: .7rem .9rem;
-    background: #fff;
-    border-top: 1px solid #e8f0eb;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     display: flex;
     gap: .5rem;
     align-items: center;
@@ -226,33 +265,33 @@
   }
   #ecobot-input {
     flex: 1;
-    border: 1px solid #d1e7d9;
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: .45rem .9rem;
     font-size: .82rem;
     outline: none;
     transition: border-color .2s, box-shadow .2s;
-    background: #f8faf9;
-    color: #2d3748;
+    background: var(--surface-2);
+    color: var(--ink);
   }
   #ecobot-input:focus {
-    border-color: #006837;
-    box-shadow: 0 0 0 3px rgba(0,104,55,.12);
-    background: #fff;
+    border-color: var(--verde);
+    box-shadow: 0 0 0 3px var(--ring);
+    background: var(--surface);
   }
-  #ecobot-input::placeholder { color: #9cad9e; }
+  #ecobot-input::placeholder { color: var(--ink-soft); }
   #ecobot-send {
     width: 38px; height: 38px;
     border-radius: 50%;
-    background: linear-gradient(135deg,#006837,#00924e);
+    background: var(--verde-surface);
     border: none;
     display: flex; align-items:center; justify-content:center;
     cursor: pointer;
     flex-shrink: 0;
     transition: transform .2s, box-shadow .2s;
-    box-shadow: 0 2px 8px rgba(0,104,55,.3);
+    box-shadow: 0 2px 8px rgba(14,91,63,.3);
   }
-  #ecobot-send:hover  { transform: scale(1.1); box-shadow: 0 4px 14px rgba(0,104,55,.4); }
+  #ecobot-send:hover  { transform: scale(1.1); box-shadow: 0 4px 14px rgba(14,91,63,.4); }
   #ecobot-send:active { transform: scale(.95); }
   #ecobot-send i { color:#fff; font-size:.95rem; }
   #ecobot-send:disabled { opacity:.5; cursor:not-allowed; transform:none; }
@@ -272,9 +311,12 @@
   <div id="ecobot-header">
     <div class="bot-avatar"><i class="bi bi-robot"></i></div>
     <div class="bot-info">
-      <p class="bot-name">🌱 EcoBot</p>
-      <span class="bot-status" id="ecobot-status-text">En línea · EcoLearn UDEC</span>
+      <p class="bot-name"><i class="bi bi-flower1" style="color:var(--brote);"></i> EcoBot</p>
+      <span class="bot-status"><span class="dot-live"></span><span id="ecobot-status-text">En línea · EcoLearn UDEC</span></span>
     </div>
+    <button id="ecobot-reset-btn" onclick="ecobotReset()" title="Reiniciar conversación">
+      <i class="bi bi-arrow-clockwise" style="font-size:.85rem;"></i>
+    </button>
     <button id="ecobot-lang-btn" onclick="ecobotSwitchLang()" title="Cambiar idioma / Switch language">
       ES
     </button>
@@ -287,7 +329,7 @@
 
   {{-- Messages --}}
   <div id="ecobot-messages">
-    {{-- Initial greeting injected by JS --}}
+    {{-- Messages injected by JS (restored from session or greeting) --}}
     <div id="ecobot-typing">
       <div class="avatar"><i class="bi bi-robot"></i></div>
       <div class="dots">
@@ -295,6 +337,9 @@
       </div>
     </div>
   </div>
+
+  {{-- Quick suggestion chips --}}
+  <div id="ecobot-suggestions"></div>
 
   {{-- Input --}}
   <form id="ecobot-form" onsubmit="ecobotSend(event)">
@@ -315,11 +360,13 @@
 
 <script>
 (function () {
-  const ROUTE  = '{{ route("chatbot.respond") }}';
-  const CSRF   = '{{ csrf_token() }}';
+  const ROUTE     = '{{ route("chatbot.respond") }}';
+  const CSRF      = '{{ csrf_token() }}';
+  const STATE_KEY = 'ecobot-state-v1';
 
-  let lang     = 'es';
+  let lang      = 'es';
   let firstOpen = true;
+  let history   = []; // { text, role }
 
   const $toggle   = document.getElementById('ecobot-toggle');
   const $window   = document.getElementById('ecobot-window');
@@ -331,6 +378,7 @@
   const $banner   = document.getElementById('ecobot-banner');
   const $status   = document.getElementById('ecobot-status-text');
   const $dot      = document.getElementById('ecobot-dot');
+  const $suggest  = document.getElementById('ecobot-suggestions');
 
   const banners = {
     es: '"Soy LIBRE, AUTÓNOMO Y RESPONSABLE a través del diálogo y la construcción, como ideal regulativo."',
@@ -342,16 +390,92 @@
     en: 'Hello! I\'m **EcoBot**, your assistant at EcoLearn UDEC. 🌱\n\n*"I am FREE, AUTONOMOUS AND RESPONSIBLE through dialogue and construction, as a regulative ideal; I lead, control and dictate my own laws."*\n\nType **help** to see my topics, or ask me anything.',
   };
 
-  // ── Render markdown-lite (bold + italic + newlines)
+  const chips = {
+    es: [
+      { label: '📚 Cursos',   text: 'cursos' },
+      { label: '✅ Tareas',   text: 'tareas' },
+      { label: '📊 Progreso', text: 'progreso' },
+      { label: '🆘 Ayuda',    text: 'ayuda' },
+    ],
+    en: [
+      { label: '📚 Courses',  text: 'courses' },
+      { label: '✅ Tasks',    text: 'tasks' },
+      { label: '📊 Progress', text: 'progress' },
+      { label: '🆘 Help',     text: 'help' },
+    ],
+  };
+
+  // ── Persistence (sessionStorage: survives page navigation, clears when the tab closes) ──
+  function saveState() {
+    try {
+      sessionStorage.setItem(STATE_KEY, JSON.stringify({
+        lang, firstOpen, history,
+        open: $window.classList.contains('is-open'),
+      }));
+    } catch (e) {}
+  }
+
+  function loadState() {
+    try {
+      const raw = sessionStorage.getItem(STATE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (e) { return null; }
+  }
+
+  // ── Emoji → flat green icon (no colorful background, matches the site's icon set) ──
+  const EMOJI_ICON_MAP = {
+    '✅': 'bi-check-circle-fill',
+    '⚠️': 'bi-exclamation-triangle-fill',
+    '⚖️': 'bi-shield-check',
+    '🌍': 'bi-globe-americas',
+    '🌐': 'bi-translate',
+    '🌟': 'bi-star-fill',
+    '🌱': 'bi-flower1',
+    '🌿': 'bi-leaf-fill',
+    '👋': 'bi-emoji-smile-fill',
+    '💬': 'bi-chat-dots-fill',
+    '📊': 'bi-bar-chart-fill',
+    '📚': 'bi-collection-fill',
+    '🔹': 'bi-check2',
+    '🤝': 'bi-people-fill',
+    '🦋': 'bi-compass-fill',
+    '🧠': 'bi-lightbulb-fill',
+    '🎉': 'bi-stars',
+  };
+
+  function emojify(html) {
+    Object.keys(EMOJI_ICON_MAP).forEach(function (emoji) {
+      if (html.indexOf(emoji) === -1) return;
+      const icon = '<i class="bi ' + EMOJI_ICON_MAP[emoji] + '" style="color:var(--verde-ink);"></i>';
+      html = html.split(emoji).join(icon);
+    });
+    return html;
+  }
+
+  // ── Render markdown-lite (bold + italic + newlines) ──
   function renderMarkdown(text) {
-    return text
+    const html = text
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/\n/g, '<br>');
+    return emojify(html);
   }
 
-  function addMessage(text, role) {
+  function renderChips() {
+    $suggest.innerHTML = '';
+    chips[lang].forEach(function (c) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ecobot-chip';
+      btn.textContent = c.label;
+      btn.onclick = function () { sendText(c.text); };
+      $suggest.appendChild(btn);
+    });
+  }
+
+  function addMessage(text, role, persist) {
     const wrap = document.createElement('div');
     wrap.className = 'ecobot-msg ' + role;
 
@@ -361,12 +485,17 @@
         '<div class="bubble">' + renderMarkdown(text) + '</div>';
     } else {
       wrap.innerHTML =
-        '<div class="avatar" style="background:linear-gradient(135deg,#2d3748,#4a5568)"><i class="bi bi-person-fill"></i></div>' +
+        '<div class="avatar"><i class="bi bi-person-fill"></i></div>' +
         '<div class="bubble">' + renderMarkdown(text) + '</div>';
     }
 
     $msgs.insertBefore(wrap, $typing);
     $msgs.scrollTop = $msgs.scrollHeight;
+
+    if (persist !== false) {
+      history.push({ text: text, role: role });
+      saveState();
+    }
   }
 
   function setTyping(show) {
@@ -381,11 +510,14 @@
     $banner.textContent  = banners[newLang];
     $input.placeholder   = newLang === 'es' ? 'Escribe tu mensaje…' : 'Type your message…';
     $status.textContent  = newLang === 'es' ? 'En línea · EcoLearn UDEC' : 'Online · EcoLearn UDEC';
+    renderChips();
+    saveState();
   }
 
   window.ecobotToggle = function () {
     const open = $window.classList.toggle('is-open');
     $toggle.classList.toggle('is-open', open);
+    saveState();
 
     if (open) {
       $dot.style.display = 'none';
@@ -412,9 +544,20 @@
     addMessage(msg, 'bot');
   };
 
-  window.ecobotSend = async function (e) {
-    e.preventDefault();
-    const text = $input.value.trim();
+  window.ecobotReset = function () {
+    history = [];
+    firstOpen = true;
+    $msgs.querySelectorAll('.ecobot-msg').forEach(function (el) { el.remove(); });
+    saveState();
+    setTyping(true);
+    setTimeout(function () {
+      setTyping(false);
+      addMessage(welcomes[lang], 'bot');
+    }, 500);
+  };
+
+  async function sendText(text) {
+    text = text.trim();
     if (!text) return;
 
     addMessage(text, 'user');
@@ -429,23 +572,36 @@
           'X-CSRF-TOKEN': CSRF,
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ message: text, lang }),
+        body: JSON.stringify({ message: text, lang: lang }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(function () { return null; });
 
       // Simulate a short thinking delay
-      await new Promise(r => setTimeout(r, 400 + Math.random() * 300));
+      await new Promise(function (r) { setTimeout(r, 400 + Math.random() * 300); });
 
       setTyping(false);
 
-      if (data.lang && data.lang !== lang) {
+      if (!res.ok) {
+        if (res.status === 419) {
+          addMessage(lang === 'es'
+            ? '⚠️ Tu sesión expiró. Recarga la página para seguir chateando.'
+            : '⚠️ Your session expired. Reload the page to keep chatting.', 'bot');
+          return;
+        }
+        addMessage((data && (data.text || data.message)) ||
+          (lang === 'es' ? '⚠️ Ocurrió un error. Inténtalo de nuevo.' : '⚠️ Something went wrong. Please try again.'),
+          'bot');
+        return;
+      }
+
+      if (data && data.lang && data.lang !== lang) {
         setLang(data.lang);
       }
 
-      addMessage(data.text || data.message || '…', 'bot');
+      addMessage((data && (data.text || data.message)) || '…', 'bot');
 
-    } catch {
+    } catch (e) {
       setTyping(false);
       addMessage(lang === 'es'
         ? '⚠️ Error de conexión. Por favor, inténtalo de nuevo.'
@@ -453,19 +609,47 @@
         'bot'
       );
     }
+  }
+
+  window.ecobotSend = function (e) {
+    e.preventDefault();
+    sendText($input.value);
   };
 
   // Allow Enter to send
   $input.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      ecobotSend(e);
+      sendText($input.value);
     }
   });
 
-  // Show notification dot after 3s if not opened yet
-  setTimeout(function () {
-    if (firstOpen) $dot.style.display = 'block';
-  }, 3000);
+  // Escape closes the window
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && $window.classList.contains('is-open')) {
+      window.ecobotToggle();
+    }
+  });
+
+  // ── Restore previous conversation (same tab, across page navigations) ──
+  const saved = loadState();
+  if (saved && Array.isArray(saved.history) && saved.history.length) {
+    lang = saved.lang || 'es';
+    firstOpen = !!saved.firstOpen;
+    setLang(lang);
+    saved.history.forEach(function (m) { addMessage(m.text, m.role, false); });
+    history = saved.history;
+    if (saved.open) {
+      $window.classList.add('is-open');
+      $toggle.classList.add('is-open');
+      $dot.style.display = 'none';
+    }
+  } else {
+    renderChips();
+    // Show notification dot after 3s if not opened yet
+    setTimeout(function () {
+      if (firstOpen) $dot.style.display = 'block';
+    }, 3000);
+  }
 }());
 </script>
