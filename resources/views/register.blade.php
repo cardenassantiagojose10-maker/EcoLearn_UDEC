@@ -240,7 +240,7 @@
       <p>Crea tu cuenta y empieza tu ruta de aprendizaje en educación ambiental.</p>
 
       <ul class="brand-feats">
-        <li><i class="bi bi-collection-fill"></i> Módulos y evaluaciones</li>
+        <li><i class="bi bi-collection-fill"></i> Cursos y evaluaciones</li>
         <li><i class="bi bi-graph-up-arrow"></i> Seguimiento de tu progreso</li>
         <li><i class="bi bi-trophy-fill"></i> Puntos, niveles e insignias</li>
       </ul>

@@ -201,7 +201,7 @@
       <i class="bi bi-house-heart-fill"></i> Inicio
     </a>
     <a href="{{ route('courses.index') }}" class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}">
-      <i class="bi bi-collection-fill"></i> Módulos
+      <i class="bi bi-collection-fill"></i> Cursos
     </a>
     <a href="{{ route('tasks.index') }}" class="nav-link {{ request()->routeIs('tasks.*') ? 'active' : '' }}">
       <i class="bi bi-patch-check-fill"></i> Tareas
@@ -221,7 +221,7 @@
         <i class="bi bi-clipboard2-data-fill"></i> Analítica
       </a>
       <a href="{{ route('admin.courses.index') }}" class="nav-link {{ request()->routeIs('admin.courses.*') ? 'active' : '' }}">
-        <i class="bi bi-journal-richtext"></i> Gestionar módulos
+        <i class="bi bi-journal-richtext"></i> Gestionar cursos
       </a>
       <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
         <i class="bi bi-people-fill"></i> Estudiantes

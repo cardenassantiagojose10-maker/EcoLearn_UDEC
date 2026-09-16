@@ -39,9 +39,9 @@
         <h1 class="font-display" style="font-weight:800; font-size:34px; line-height:1.08; letter-spacing:-1.1px; margin:12px 0 10px;">{{ $greeting }},<br>{{ $first }} <i class="bi bi-emoji-smile-fill" style="color:var(--brote); font-size:.8em;"></i></h1>
         <p style="margin:0; font-size:14.5px; line-height:1.5; max-width:44ch; color:#fff;">
           @if($stats['courses_total'] > 0)
-            Tienes <strong style="color:var(--brote);">{{ $stats['courses_total'] }} módulos</strong> disponibles y <strong style="color:var(--brote);">{{ $stats['tasks_pending'] }} tareas</strong> por completar.
+            Tienes <strong style="color:var(--brote);">{{ $stats['courses_total'] }} cursos</strong> disponibles y <strong style="color:var(--brote);">{{ $stats['tasks_pending'] }} tareas</strong> por completar.
           @else
-            Aún no hay módulos publicados. Vuelve pronto para empezar tu ruta.
+            Aún no hay cursos publicados. Vuelve pronto para empezar tu ruta.
           @endif
         </p>
       </div>
@@ -112,7 +112,7 @@
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
     @php
       $quick = [
-        ['bi-collection-fill', 'Módulos educativos', $stats['courses_total'].' módulos disponibles', route('courses.index'), 'var(--verde)'],
+        ['bi-collection-fill', 'Cursos educativos', $stats['courses_total'].' cursos disponibles', route('courses.index'), 'var(--verde)'],
         ['bi-patch-question-fill', 'Evaluaciones', $stats['attempts_total'].' evaluaciones rendidas', route('courses.index'), 'var(--miel)'],
         ['bi-check2-square', 'Tareas', $stats['tasks_pending'].' pendientes · '.$stats['tasks_done'].' hechas', route('tasks.index'), 'var(--brote)'],
       ];
@@ -136,7 +136,7 @@
     <div style="background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:22px;">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
         <div class="font-display" style="font-weight:700; font-size:17px; letter-spacing:-.4px;">Continúa donde quedaste</div>
-        <a href="{{ route('courses.index') }}" style="font-size:12.5px; font-weight:700; color:var(--verde-ink);">Todos los módulos →</a>
+        <a href="{{ route('courses.index') }}" style="font-size:12.5px; font-weight:700; color:var(--verde-ink);">Todos los cursos →</a>
       </div>
 
       <div style="display:flex; flex-direction:column; gap:10px;">
@@ -153,7 +153,7 @@
             <span style="flex-shrink:0; font-size:11.5px; font-weight:800; color:var(--miel-ink); white-space:nowrap;"><i class="bi bi-star-fill"></i> +120</span>
           </a>
         @empty
-          <p style="font-size:.9rem; color:var(--ink-soft); margin:0;">No hay módulos disponibles aún.</p>
+          <p style="font-size:.9rem; color:var(--ink-soft); margin:0;">No hay cursos disponibles aún.</p>
         @endforelse
       </div>
 
@@ -161,7 +161,7 @@
         <div style="margin-top:16px; display:flex; align-items:center; gap:14px; padding:16px; border-radius:16px; background:rgba(30,142,90,.08); border:1px solid rgba(30,142,90,.28);">
           <i class="bi bi-patch-check-fill" style="font-size:24px; color:var(--ok-ink); flex-shrink:0;"></i>
           <div style="flex:1; min-width:0;">
-            <div style="font-size:13.5px; font-weight:700;">Última evaluación: {{ optional($lastAttempt->course)->title ?? 'Módulo' }}</div>
+            <div style="font-size:13.5px; font-weight:700;">Última evaluación: {{ optional($lastAttempt->course)->title ?? 'Curso' }}</div>
             <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">Resultado {{ $lastAttempt->percentage() }}% · {{ $lastAttempt->created_at->diffForHumans() }}</div>
           </div>
           <a href="{{ route('courses.result', ['courseId' => $lastAttempt->course_id, 'attemptId' => $lastAttempt->id]) }}"
@@ -191,7 +191,7 @@
             </div>
             <div style="flex:1; background:rgba(255,255,255,.16); border-radius:11px; padding:9px 10px;">
               <div style="font-size:15px; font-weight:800;">{{ $stats['courses_total'] }}</div>
-              <div style="font-size:10.5px;">Módulos</div>
+              <div style="font-size:10.5px;">Cursos</div>
             </div>
           </div>
           <a href="{{ route('tasks.create') }}" style="display:flex; width:100%; background:#fff; color:var(--arcilla); border:none; border-radius:12px; padding:12px; font-size:13.5px; font-weight:800; align-items:center; justify-content:center; gap:8px;">

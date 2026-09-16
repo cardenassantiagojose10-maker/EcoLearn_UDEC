@@ -81,15 +81,34 @@
 {{-- ══════════════════════════════════════════════
      MÓDULOS
 ══════════════════════════════════════════════ --}}
-<h5 class="font-display mb-3" style="font-weight:700;">
-  <i class="bi bi-grid-3x3-gap-fill me-2" style="color:var(--verde-ink);"></i>
-  Contenido del curso
-</h5>
+<div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+  <h5 class="font-display mb-0" style="font-weight:700;">
+    <i class="bi bi-grid-3x3-gap-fill me-2" style="color:var(--verde-ink);"></i>
+    Contenido del curso
+  </h5>
+  <span id="modules-progress-label" style="font-size:.8rem; font-weight:700; color:var(--verde-ink);">
+    0 de {{ count($modules) }} completados
+  </span>
+</div>
+
+{{-- Barra de progreso de módulos (se actualiza con localStorage) --}}
+<div class="mb-4" style="background:var(--surface-2); border:1px solid var(--border); border-radius:999px; height:10px; overflow:hidden;">
+  <div id="modules-progress-bar" style="height:100%; width:0%; background:var(--verde-surface); transition:width .35s ease;"></div>
+</div>
 
 @foreach($modules as $module)
-<div class="mb-4" style="background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden;">
-  <div class="d-flex align-items-center gap-3 py-3 px-4"
-       style="background:var(--surface-2); border-bottom:1px solid var(--border);">
+@php
+  $quiz = $module['quiz'] ?? null;
+  $collapseId = 'module-body-'.$module['number'];
+@endphp
+<div class="mb-4 module-card" data-module-card style="background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden;">
+  <button type="button"
+          class="d-flex align-items-center gap-3 py-3 px-4 w-100 border-0 text-start"
+          data-bs-toggle="collapse"
+          data-bs-target="#{{ $collapseId }}"
+          aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
+          aria-controls="{{ $collapseId }}"
+          style="background:var(--surface-2); border-bottom:1px solid var(--border); cursor:pointer;">
     <div style="width:34px; height:34px; border-radius:11px; background:var(--verde-surface); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.85rem; flex-shrink:0;">
       {{ $module['number'] }}
     </div>
@@ -99,11 +118,15 @@
         {{ $module['title'] }}
       </h6>
     </div>
-    <span class="ms-auto" style="background:var(--verde-pale); color:var(--verde-ink); font-size:.72rem; font-weight:700; padding:5px 11px; border-radius:999px;">
+    <i class="bi bi-check-circle-fill module-done-badge ms-auto" data-done-badge
+       style="color:var(--ok-ink); font-size:1rem; display:none;"></i>
+    <span style="background:var(--verde-pale); color:var(--verde-ink); font-size:.72rem; font-weight:700; padding:5px 11px; border-radius:999px;">
       Módulo {{ $module['number'] }}
     </span>
-  </div>
+    <i class="bi bi-chevron-down module-chevron" style="font-size:.85rem; color:var(--ink-soft); transition:transform .25s ease;"></i>
+  </button>
 
+  <div class="collapse {{ $loop->first ? 'show' : '' }}" id="{{ $collapseId }}">
   <div class="px-4 py-3">
 
     {{-- Contenido principal --}}
@@ -129,7 +152,7 @@
     {{-- Actividad --}}
     @if(!empty($module['activity']))
       @php $act = $module['activity']; @endphp
-      <div class="mt-2 p-3" style="background:rgba(244,168,44,.10); border:1px solid rgba(244,168,44,.3); border-radius:12px;">
+      <div class="mt-2 mb-3 p-3" style="background:rgba(244,168,44,.10); border:1px solid rgba(244,168,44,.3); border-radius:12px;">
         <div class="d-flex align-items-center gap-2 mb-1">
           <i class="bi {{ $act['icon'] ?? 'bi-pencil-square' }}" style="color:var(--miel-ink); font-size:1rem;"></i>
           <span class="fw-semibold" style="color:var(--miel-ink); font-size:.82rem;">
@@ -142,9 +165,148 @@
       </div>
     @endif
 
+    {{-- Mini-quiz interactivo del módulo --}}
+    @if($quiz)
+    <div class="mt-2 mb-3 p-3 module-quiz"
+         data-quiz
+         data-correct="{{ $quiz['correct'] }}"
+         data-explanation="{{ $quiz['explanation'] ?? '' }}"
+         style="background:var(--surface-2); border:1px solid var(--border); border-radius:12px;">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <i class="bi bi-patch-question-fill" style="color:var(--verde-ink); font-size:1rem;"></i>
+        <span class="fw-semibold" style="color:var(--verde-ink); font-size:.82rem;">
+          Comprueba lo aprendido
+        </span>
+      </div>
+      <p class="mb-2" style="font-size:.87rem; color:var(--ink); font-weight:600;">{{ $quiz['question'] }}</p>
+
+      <div class="d-flex flex-column gap-2 mb-2">
+        @foreach($quiz['options'] as $letter => $text)
+          <label class="d-flex align-items-center gap-2 quiz-option"
+                 data-quiz-option
+                 style="cursor:pointer; padding:8px 11px; border-radius:11px; background:var(--surface); border:1px solid var(--border); font-size:.85rem;">
+            <input type="radio" name="quiz-{{ $course->id }}-{{ $module['number'] }}" value="{{ $letter }}"
+                   class="form-check-input m-0 flex-shrink-0" style="accent-color:var(--verde);">
+            <span style="width:22px; height:22px; border-radius:999px; background:var(--verde-pale); color:var(--verde-ink); font-weight:700; font-size:.72rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">{{ $letter }}</span>
+            <span style="color:var(--ink);">{{ $text }}</span>
+          </label>
+        @endforeach
+      </div>
+
+      <button type="button" class="btn btn-sm fw-semibold" data-quiz-check
+              style="background:var(--verde-surface); color:#fff; border-radius:10px; font-size:.8rem; border:none; padding:7px 16px;">
+        <i class="bi bi-check2-square me-1"></i>Comprobar respuesta
+      </button>
+
+      <div class="mt-2 quiz-feedback" data-quiz-feedback hidden style="font-size:.83rem; border-radius:10px; padding:10px 12px;"></div>
+    </div>
+    @endif
+
+    {{-- Marcar módulo como completado --}}
+    <label class="d-flex align-items-center gap-2 mt-1" style="cursor:pointer; font-size:.85rem; color:var(--ink);">
+      <input type="checkbox" class="form-check-input m-0" data-module-complete
+             data-course="{{ $course->id }}" data-module="{{ $module['number'] }}"
+             style="accent-color:var(--verde);">
+      <span class="fw-semibold">Marcar módulo como completado</span>
+    </label>
+
+  </div>
   </div>
 </div>
 @endforeach
+
+<script>
+(function () {
+  var courseId = {{ $course->id }};
+  var totalModules = {{ count($modules) }};
+
+  function storeKey(mod) { return 'ecolearn-module-' + courseId + '-' + mod; }
+
+  function updateProgress() {
+    var done = 0;
+    document.querySelectorAll('[data-module-complete]').forEach(function (cb) {
+      var checked = false;
+      try { checked = localStorage.getItem(storeKey(cb.dataset.module)) === '1'; } catch (e) {}
+      cb.checked = checked;
+      var badge = cb.closest('[data-module-card]').querySelector('[data-done-badge]');
+      if (badge) badge.style.display = checked ? 'inline-block' : 'none';
+      if (checked) done++;
+    });
+    var pct = totalModules ? Math.round((done / totalModules) * 100) : 0;
+    var bar = document.getElementById('modules-progress-bar');
+    var label = document.getElementById('modules-progress-label');
+    if (bar) bar.style.width = pct + '%';
+    if (label) label.textContent = done + ' de ' + totalModules + ' completados';
+  }
+
+  document.querySelectorAll('[data-module-complete]').forEach(function (cb) {
+    cb.addEventListener('change', function () {
+      try { localStorage.setItem(storeKey(cb.dataset.module), cb.checked ? '1' : '0'); } catch (e) {}
+      updateProgress();
+    });
+  });
+
+  document.querySelectorAll('[data-quiz-check]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var quizBox = btn.closest('[data-quiz]');
+      var selected = quizBox.querySelector('input[type="radio"]:checked');
+      var feedback = quizBox.querySelector('[data-quiz-feedback]');
+      var correct = quizBox.dataset.correct;
+
+      quizBox.querySelectorAll('[data-quiz-option]').forEach(function (opt) {
+        opt.style.borderColor = 'var(--border)';
+        opt.style.background = 'var(--surface)';
+      });
+
+      if (!selected) {
+        feedback.hidden = false;
+        feedback.style.background = 'rgba(224,138,11,.12)';
+        feedback.style.border = '1px solid rgba(224,138,11,.35)';
+        feedback.style.color = 'var(--warn-ink)';
+        feedback.innerHTML = '<i class="bi bi-exclamation-circle-fill me-1"></i>Selecciona una opción antes de comprobar.';
+        return;
+      }
+
+      var chosenLabel = selected.closest('[data-quiz-option]');
+      var isCorrect = selected.value === correct;
+
+      if (isCorrect) {
+        chosenLabel.style.borderColor = 'var(--ok-ink)';
+        chosenLabel.style.background = 'rgba(30,142,90,.12)';
+        feedback.style.background = 'rgba(30,142,90,.12)';
+        feedback.style.border = '1px solid rgba(30,142,90,.35)';
+        feedback.style.color = 'var(--ok-ink)';
+        feedback.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i><strong>¡Correcto!</strong> ' + (quizBox.dataset.explanation || '');
+      } else {
+        chosenLabel.style.borderColor = 'var(--err-ink)';
+        chosenLabel.style.background = 'rgba(201,59,49,.10)';
+        var correctLabel = quizBox.querySelector('input[value="' + correct + '"]');
+        if (correctLabel) {
+          var correctOpt = correctLabel.closest('[data-quiz-option]');
+          correctOpt.style.borderColor = 'var(--ok-ink)';
+          correctOpt.style.background = 'rgba(30,142,90,.10)';
+        }
+        feedback.style.background = 'rgba(201,59,49,.10)';
+        feedback.style.border = '1px solid rgba(201,59,49,.3)';
+        feedback.style.color = 'var(--err-ink)';
+        feedback.innerHTML = '<i class="bi bi-x-circle-fill me-1"></i><strong>No es correcto.</strong> La respuesta correcta es <strong>' + correct + '</strong>. ' + (quizBox.dataset.explanation || '');
+      }
+      feedback.hidden = false;
+    });
+  });
+
+  updateProgress();
+
+  document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function (btn) {
+    var chevron = btn.querySelector('.module-chevron');
+    var target = document.querySelector(btn.dataset.bsTarget);
+    if (!target || !chevron) return;
+    chevron.style.transform = btn.getAttribute('aria-expanded') === 'true' ? 'rotate(180deg)' : 'rotate(0)';
+    target.addEventListener('shown.bs.collapse', function () { chevron.style.transform = 'rotate(180deg)'; });
+    target.addEventListener('hidden.bs.collapse', function () { chevron.style.transform = 'rotate(0)'; });
+  });
+})();
+</script>
 
 {{-- ══════════════════════════════════════════════
      EVALUACIÓN INTERACTIVA

@@ -222,7 +222,7 @@
 
     <div class="collapse navbar-collapse d-lg-flex align-items-lg-center" id="navMenu">
       <ul class="navbar-nav d-lg-flex flex-row gap-lg-3 mt-3 mt-lg-0 me-lg-4">
-        <li class="nav-item"><a class="nav-link" href="#modulos">Módulos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#modulos">Cursos</a></li>
         <li class="nav-item"><a class="nav-link" href="#como-funciona">Cómo funciona</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('contacto.index') }}">Contacto</a></li>
       </ul>
@@ -255,7 +255,7 @@
     <h1 class="font-display">Aprende, actúa,<br>cierra el ciclo</h1>
 
     <p class="lead-eco mx-auto">
-      Módulos, evaluaciones y seguimiento de progreso para fortalecer la cultura
+      Cursos, evaluaciones y seguimiento de progreso para fortalecer la cultura
       ambiental de la comunidad universitaria de la UDEC.
     </p>
 
@@ -269,7 +269,7 @@
     </div>
 
     <div class="hero-stats">
-      <div><div class="num">+12</div><div class="lbl">Módulos educativos</div></div>
+      <div><div class="num">4</div><div class="lbl">Cursos educativos</div></div>
       <div><div class="num">100%</div><div class="lbl">Gratuito para la comunidad UDEC</div></div>
       <div><div class="num">3R</div><div class="lbl">Reducir · Reutilizar · Reciclar</div></div>
     </div>
@@ -292,7 +292,7 @@
         </div>
         <h4 class="font-display" style="font-size:18px; font-weight:700; letter-spacing:-.3px;">Aprendizaje</h4>
         <p style="color:var(--ink-soft); font-size:14px; margin-top:8px; margin-bottom:0;">
-          Accede a módulos educativos sobre sostenibilidad, reciclaje y gestión de residuos.
+          Accede a cursos educativos sobre sostenibilidad, reciclaje y gestión de residuos.
         </p>
       </div>
     </div>
@@ -344,7 +344,7 @@
       <div class="step-card">
         <div class="step-num">2</div>
         <div>
-          <div class="font-display" style="font-weight:700; font-size:16px;">Explora los módulos</div>
+          <div class="font-display" style="font-weight:700; font-size:16px;">Explora los cursos</div>
           <p style="color:var(--ink-soft); font-size:13.5px; margin:6px 0 0;">Avanza a tu ritmo por contenidos de sostenibilidad y reciclaje.</p>
         </div>
       </div>
