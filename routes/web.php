@@ -53,6 +53,7 @@ Route::get('/register', [AuthViewController::class, 'showRegister'])
     ->name('register');
 
 Route::post('/register', [AuthViewController::class, 'register'])
+    ->middleware('throttle:5,1')
     ->name('register.store');
 
 // LOGOUT

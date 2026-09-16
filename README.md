@@ -481,8 +481,8 @@ After running `php artisan migrate --seed`, the following accounts are available
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | `admin@ecolearn.co` | `password` |
-| Student | `estudiante@ecolearn.co` | `password` |
+| Admin | `admin@ecolearn.cl` | `admin123` |
+| Student | `student@ecolearn.cl` | `password` |
 
 > **Change these credentials immediately in any non-local environment.**
 

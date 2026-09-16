@@ -19,6 +19,8 @@ class AuthViewController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
             return redirect()->route('dashboard.dashboard');
         }
 
@@ -35,7 +37,7 @@ class AuthViewController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:8'
         ]);
 
         User::create([
