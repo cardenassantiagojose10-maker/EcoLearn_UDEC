@@ -27,6 +27,16 @@ class DatabaseSeeder extends Seeder
             'role'     => 'admin',
         ]);
 
+        $admin = config('app.admin');
+
+        if ($admin['email'] && $admin['password']) {
+            User::updateOrCreate(['email' => $admin['email']], [
+                'name'     => $admin['name'],
+                'password' => $admin['password'],
+                'role'     => 'admin',
+            ]);
+        }
+
         $this->call(CourseSeeder::class);
     }
 }

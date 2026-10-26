@@ -123,4 +123,20 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Administrador principal
+    |--------------------------------------------------------------------------
+    |
+    | Si se definen ADMIN_EMAIL y ADMIN_PASSWORD, el seeder crea (o actualiza)
+    | este usuario con rol de administrador. La contraseña nunca va al repo.
+    |
+    */
+
+    'admin' => [
+        'name' => env('ADMIN_NAME', 'Administrador'),
+        'email' => env('ADMIN_EMAIL'),
+        'password' => env('ADMIN_PASSWORD'),
+    ],
+
 ];
